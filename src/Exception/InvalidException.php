@@ -1,7 +1,7 @@
 <?php
 namespace Spark\Auth\Exception;
 
-class InvalidException extends \Exception
+class InvalidException extends \DomainException
 {
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {

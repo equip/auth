@@ -1,7 +1,7 @@
 <?php
 namespace Spark\Auth;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\RequestInterface as Request;
 use Spark\Auth\Exception\InvalidException;
 
 abstract class AbstractAuthenticator

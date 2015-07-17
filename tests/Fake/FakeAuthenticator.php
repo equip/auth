@@ -2,7 +2,7 @@
 namespace SparkTests\Auth\Fake;
 
 use Spark\Auth\AbstractAuthenticator;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\RequestInterface as Request;
 
 
 class FakeAuthenticator extends AbstractAuthenticator

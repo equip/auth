@@ -1,15 +1,13 @@
 <?php
 namespace Spark\Auth;
 
-use Auryn\Injector;
+use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthHandler
 {
 
     protected $authenticator;
-    protected $injector;
 
     public function __construct(AbstractAuthenticator $authenticator)
     {

@@ -10,4 +10,9 @@ class AuthException extends \Exception
         }
         parent::__construct($message, $code, $previous);
     }
+
+    public function getStatusCode()
+    {
+        return 401;
+    }
 }

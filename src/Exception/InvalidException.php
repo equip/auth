@@ -10,4 +10,9 @@ class InvalidException extends \DomainException
         }
         parent::__construct($message, $code, $previous);
     }
+
+    public function getStatusCode()
+    {
+        return 400;
+    }
 }

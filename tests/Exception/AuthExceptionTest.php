@@ -14,6 +14,11 @@ class AuthExceptionTest extends TestCase
 
         $newException = new AuthException('Custom message.', 50);
         $this->assertEquals('Custom message.', $newException->getMessage());
+    }
 
+    public function testGetStatusCode()
+    {
+        $exception = new AuthException();
+        $this->assertEquals(401, $exception->getStatusCode());
     }
 }

@@ -16,4 +16,10 @@ class InvalidExceptionTest extends TestCase
         $this->assertEquals('Custom message.', $newException->getMessage());
 
     }
+
+    public function testGetStatusCode()
+    {
+        $exception = new InvalidException();
+        $this->assertEquals(400, $exception->getStatusCode());
+    }
 }

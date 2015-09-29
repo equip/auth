@@ -1,24 +1,22 @@
 <?php
 namespace SparkTests\Auth\Exception;
 
-use PHPUnit_Framework_TestCase as TestCase;
 use Spark\Auth\Exception\AuthException;
 
-class AuthExceptionTest extends TestCase
+class AuthExceptionTest extends ExceptionTestCase
 {
-
-    public function testConstruct()
+    protected function getExceptionClass()
     {
-        $exception = new AuthException();
-        $this->assertEquals('There was an error authenticating.', $exception->getMessage());
-
-        $newException = new AuthException('Custom message.', 50);
-        $this->assertEquals('Custom message.', $newException->getMessage());
+        return AuthException::class;
     }
 
-    public function testGetStatusCode()
+    protected function getDefaultMessage()
     {
-        $exception = new AuthException();
-        $this->assertEquals(401, $exception->getStatusCode());
+        return 'There was an error authenticating';
+    }
+
+    protected function getStatusCode()
+    {
+        return 500;
     }
 }

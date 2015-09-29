@@ -2,12 +2,13 @@
 namespace Spark\Auth\Exception;
 
 /**
- * Parent class for authentication-related exceptions.
+ * Exception that occurs when a user does not provide authentication
+ * credentials.
  */
-class AuthException extends \Exception
+class UnauthorizedException extends AuthException
 {
     public function __construct(
-        $message = 'There was an error authenticating',
+        $message = 'No authentication token was specified',
         $code = 0,
         \Exception $previous = null
     ) {
@@ -16,6 +17,6 @@ class AuthException extends \Exception
 
     public function getStatusCode()
     {
-        return 500;
+        return 401;
     }
 }

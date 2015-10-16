@@ -60,8 +60,8 @@ class LcobucciGeneratorTest extends TestCase
         );
         
         $this->assertSame(
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cmkiLCJzdWIiOiJ1c2VyLTEiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNn0.LvaP-PZkD1SZ10K7TPUWeXiAIoTsMaacAyMKkROJWhg',
-            $generator->getToken('user-1')
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyLTEiLCJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNn0.GDHf_4g2EYwkBAr5RQvkmiMHXvNkbjgmQoe1wLc4pfM',
+            $generator->getToken(['sub' => 'user-1'])
         );
     }
 }

@@ -44,10 +44,10 @@ class FirebaseParserTest extends TestCase
         Phake::when($this->config)->getAlgorithm()->thenReturn($algorithm);
 
         $this->parsed = [
+            'sub' => 'user-1',
             'iss' => $uri,
             'iat' => $timestamp,
             'exp' => $timestamp + $ttl,
-            'sub' => 'user-1',
         ];
     }
 
@@ -90,7 +90,7 @@ class FirebaseParserTest extends TestCase
 
     protected function parseToken(FirebaseGenerator $generator, FirebaseParser $parser)
     {
-        $token_string = $generator->getToken($this->parsed['sub']);
+        $token_string = $generator->getToken(['sub' => $this->parsed['sub']]);
         $token = $parser->parseToken($token_string);
 
         $this->assertInstanceOf(Token::class, $token);

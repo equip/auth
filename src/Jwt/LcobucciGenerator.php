@@ -50,18 +50,20 @@ class LcobucciGenerator implements GeneratorInterface
     }
 
     /**
-     * @param string $subject
+     * @param array $claims
      * @return string
      */
-    public function getToken($subject)
+    public function getToken(array $claims = [])
     {
         $issuer = (string) $this->request->getUri();
         $issued_at = $this->config->getTimestamp();
         $expiration = $issued_at + $this->config->getTtl();
         $key = $this->config->getPrivateKey();
+        foreach ($claims as $name => $value) {
+            $this->builder->set($name, $value);
+        }
         $token = $this->builder
             ->setIssuer($issuer)
-            ->setSubject($subject)
             ->setIssuedAt($issued_at)
             ->setExpiration($expiration)
             ->sign($this->signer, $key)

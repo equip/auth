@@ -34,23 +34,22 @@ class FirebaseGenerator implements GeneratorInterface
     }
 
     /**
-     * @param string $subject
+     * @param array $claims
      * @return string
      */
-    public function getToken($subject)
+    public function getToken(array $claims = [])
     {
         $issuer = (string) $this->request->getUri();
         $issued_at = $this->config->getTimestamp();
         $expiration = $issued_at + $this->config->getTtl();
         $key = $this->config->getPublicKey();
         $algorithm = $this->config->getAlgorithm();
-        $data = [
+        $claims += [
             'iss' => $issuer,
             'iat' => $issued_at,
             'exp' => $expiration,
-            'sub' => $subject,
         ];
-        return JWT::encode($data, $key, $algorithm);
+        return JWT::encode($claims, $key, $algorithm);
     }
 }
 

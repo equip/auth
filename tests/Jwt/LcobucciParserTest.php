@@ -61,7 +61,7 @@ class LcobucciParserTest extends TestCase
         $generator = $this->getGenerator($config);
         $parser = $this->getParser($config, $timestamp);
 
-        $token = $generator->getToken($this->subject);
+        $token = $generator->getToken(['sub' => $this->subject]);
         $parsed = $parser->parseToken($token);
         $this->assertInstanceOf(Token::class, $parsed);
         $this->assertSame($token, $parsed->getToken());
@@ -78,7 +78,7 @@ class LcobucciParserTest extends TestCase
         $currentConfig = $this->getMockConfiguration($currentTimestamp);
         $parser = $this->getParser($currentConfig, $currentTimestamp);
 
-        $token = $generator->getToken($this->subject);
+        $token = $generator->getToken(['sub' => $this->subject]);
 
         try {
             $parsed = $parser->parseToken($token);
@@ -139,8 +139,8 @@ class LcobucciParserTest extends TestCase
     protected function getParsed($timestamp)
     {
         return [
-            'iss' => 'uri',
             'sub' => $this->subject,
+            'iss' => 'uri',
             'iat' => $timestamp,
             'exp' => $timestamp + $this->ttl,
         ];

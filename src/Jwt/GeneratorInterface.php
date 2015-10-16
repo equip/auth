@@ -7,8 +7,8 @@ namespace Spark\Auth\Jwt;
 interface GeneratorInterface
 {
     /**
-     * @param string $subject
+     * @param array $claims
      * @return string
      */
-    public function getToken($subject);
+    public function getToken(array $claims = []);
 }

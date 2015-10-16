@@ -42,13 +42,13 @@ class FirebaseGeneratorTest extends TestCase
         );
 
         $this->assertSame(
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNiwic3ViIjoidXNlci0xIn0.GOXGA2n7CvKt9_1UoyGx7abV4HYKD6F8A2zk-wGwTw8',
-            $generator->getToken('user-1')
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyLTEiLCJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNn0.GDHf_4g2EYwkBAr5RQvkmiMHXvNkbjgmQoe1wLc4pfM',
+            $generator->getToken(['sub' => 'user-1'])
         );
 
         $this->assertSame(
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNiwic3ViIjoidXNlci0yIn0.cmqTqaQyiTJ0lI_PfkFKgCrGMwWkbXqp15UZuMO-rHU',
-            $generator->getToken('user-2')
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyLTIiLCJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNn0.YBibGrGQPAOFyAe-NbMQhogvJsRPHR45zdlUolk-68I',
+            $generator->getToken(['sub' => 'user-2'])
         );
     }
 
@@ -62,13 +62,13 @@ class FirebaseGeneratorTest extends TestCase
         );
 
         $this->assertSame(
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNiwic3ViIjoidXNlci0xIn0.GnFhK7JaIxNqkFTRXFp8WpMre40tehHPY-B6KQhEjK7LGn6f8PO61y158llOpKLd6PqT_RDK9hHNx9Ka6rIGxA',
-            $generator->getToken('user-1')
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyLTEiLCJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNn0.dUp_wNsYyAPE8HVyvpMgGwBR-jpZsdn2D0fEutV8Rmlq3Jpsgcbh1TX3ImK8KJm2qxMRxu1JY4hxepO-HkaxxA',
+            $generator->getToken(['sub' => 'user-1'])
         );
 
         $this->assertSame(
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNiwic3ViIjoidXNlci0yIn0.oEJ78pKdj5VR2bCb8lEWf8IqGcFruU2ypZwm3Cb_YIZXdNu5LXuWEd4S14VLzxaKPu785v8_mmwmMGjNOFwoxQ',
-            $generator->getToken('user-2')
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyLTIiLCJpc3MiOiJ1cmkiLCJpYXQiOjE0NDM3MTkyMzYsImV4cCI6MTQ0MzcyMjgzNn0.1Q8JBWJIum6EQoxl6cDQeoruqrjY8_kfA5q1ezZhyt5Z-oXsgtMv0KBa2qTQLjJMNk00OAl1WGLSWaEFD103hQ',
+            $generator->getToken(['sub' => 'user-2'])
         );
     }
 }

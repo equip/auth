@@ -7,4 +7,4 @@
 
 A simple middleware for creating custom authentication for your APIs. Attempts to be [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/), [PSR-4](http://www.php-fig.org/psr/psr-4/) and [PSR-7](http://www.php-fig.org/psr/psr-7/) compliant. Works great in applications that use the [ADR](https://github.com/pmjones/adr) pattern.
 
-For more information, see [the documentation](http://spark.readthedocs.org/en/latest/#authentication).
+For more information, see [the documentation](http://spark.readthedocs.org/en/latest/auth).

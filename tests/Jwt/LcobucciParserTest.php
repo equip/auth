@@ -88,13 +88,39 @@ class LcobucciParserTest extends TestCase
         }
     }
 
+    public function testParseWithException()
+    {
+        // Token with invalid parameters
+        $token = "invalid token";
+        $currentTimestamp = time();
+        $currentConfig = $this->getMockConfiguration($currentTimestamp);
+        $parser = $this->getParser($currentConfig, $currentTimestamp);
+
+        try {
+            $parsed = $parser->parseToken($token);
+            $this->fail('Expected exception was not thrown');
+        } catch (InvalidException $e) {
+            $this->assertSame(InvalidException::CODE_TOKEN_INVALID, $e->getCode());
+        }
+
+        // Generate token with invalid signature
+        $pastConfig = $this->getMockConfiguration(time(), '57315647af9b5ff0c77fb679951a9bf4');
+        $generator = $this->getGenerator($pastConfig);
+        $token = $generator->getToken(['sub' => $this->subject]);
+        try {
+            $parsed = $parser->parseToken($token);
+            $this->fail('Expected exception was not thrown');
+        } catch (InvalidException $e) {
+            $this->assertSame(InvalidException::CODE_TOKEN_INVALID, $e->getCode());
+        }
+    }
     /**
      * @param integer $timestamp
      * @return Configuration
      */
-    protected function getMockConfiguration($timestamp)
+    protected function getMockConfiguration($timestamp, $key = null)
     {
-        $key = '8122175af707e5946e40d06484ed9584';
+        $key = $key ?: '8122175af707e5946e40d06484ed9584';
         $config = Phake::mock(Configuration::class);
         Phake::when($config)->getPublicKey()->thenReturn($key);
         Phake::when($config)->getPrivateKey()->thenReturn($key);

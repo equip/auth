@@ -63,15 +63,29 @@ class AuthHandler implements MiddlewareInterface
     ) {
         if ($this->shouldFilter($request)) {
             if ($token = $this->token->getToken($request)) {
-                $this->adapter->validateToken($token);
+                $authToken = $this->adapter->validateToken($token);
             } elseif ($credentials = $this->credentials->getCredentials($request)) {
-                $this->adapter->validateCredentials($credentials);
+                $authToken = $this->adapter->validateCredentials($credentials);
             } else {
                 throw new UnauthorizedException;
             }
+
+            $request = $this->handleToken($request, $authToken);
         }
 
         return $next($request, $response);
+    }
+
+    /**
+     * Handle the Token and put it in the request
+     *
+     * @param ServerRequestInterface $request
+     * @param Token $token
+     * @return ServerRequestInterface
+     */
+    protected function handleToken(ServerRequestInterface $request, Token $token)
+    {
+        return $request->withAttribute('spark/auth:token', $token);
     }
 
     /**

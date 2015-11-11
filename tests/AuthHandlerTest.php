@@ -18,6 +18,10 @@ use Spark\Auth\Exception\UnauthorizedException;
 
 class AuthHandlerTest extends TestCase
 {
+
+    const AUTH_TOKEN_NAME = 'spark/auth:token';
+    const AUTH_TOKEN_STRING = 'token';
+
     /**
      * @var \Spark\Auth\Token\ExtractorInterface
      */
@@ -73,13 +77,23 @@ class AuthHandlerTest extends TestCase
         $token = Phake::mock(Token::class);
         Phake::when($this->token)
             ->getToken($this->request)
+            ->thenReturn(static::AUTH_TOKEN_STRING);
+
+        Phake::when($this->adapter)
+            ->validateToken(static::AUTH_TOKEN_STRING)
             ->thenReturn($token);
+
+        Phake::when($this->request)
+            ->withAttribute(static::AUTH_TOKEN_NAME, $token)
+            ->thenReturn($this->request);
 
         $response = $this->handler->__invoke($this->request, $this->response, [$this, 'next']);
 
         $this->assertTrue($this->next_called);
         $this->assertSame($this->response, $response);
-        Phake::verify($this->adapter)->validateToken($token);
+        Phake::verify($this->adapter)->validateToken(static::AUTH_TOKEN_STRING);
+        Phake::verify($this->request)->withAttribute(static::AUTH_TOKEN_NAME, $token);
+
         Phake::verifyNoInteraction($this->credentials);
     }
 
@@ -123,10 +137,19 @@ class AuthHandlerTest extends TestCase
 
     public function testCredentialsWithoutException()
     {
+        $token = Phake::mock(Token::class);
         $credentials = Phake::mock(Credentials::class);
         Phake::when($this->credentials)
             ->getCredentials($this->request)
             ->thenReturn($credentials);
+
+        Phake::when($this->adapter)
+            ->validateCredentials($credentials)
+            ->thenReturn($token);
+
+        Phake::when($this->request)
+            ->withAttribute(static::AUTH_TOKEN_NAME, $token)
+            ->thenReturn($this->request);
 
         $response = $this->handler->__invoke($this->request, $this->response, [$this, 'next']);
 
@@ -213,10 +236,19 @@ class AuthHandlerTest extends TestCase
             $filter
         );
 
+        $token = Phake::mock(Token::class);
         $credentials = Phake::mock(Credentials::class);
         Phake::when($this->credentials)
             ->getCredentials($this->request)
             ->thenReturn($credentials);
+
+        Phake::when($this->adapter)
+            ->validateCredentials($credentials)
+            ->thenReturn($token);
+
+        Phake::when($this->request)
+            ->withAttribute(static::AUTH_TOKEN_NAME, $token)
+            ->thenReturn($this->request);
 
         $response = $this->handler->__invoke($this->request, $this->response, [$this, 'next']);
 

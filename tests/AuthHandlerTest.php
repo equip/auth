@@ -19,7 +19,6 @@ use Spark\Auth\Exception\UnauthorizedException;
 class AuthHandlerTest extends TestCase
 {
 
-    const AUTH_TOKEN_NAME = 'spark/auth:token';
     const AUTH_TOKEN_STRING = 'token';
 
     /**
@@ -84,7 +83,7 @@ class AuthHandlerTest extends TestCase
             ->thenReturn($token);
 
         Phake::when($this->request)
-            ->withAttribute(static::AUTH_TOKEN_NAME, $token)
+            ->withAttribute(AuthHandler::TOKEN_ATTRIBUTE, $token)
             ->thenReturn($this->request);
 
         $response = $this->handler->__invoke($this->request, $this->response, [$this, 'next']);
@@ -92,7 +91,7 @@ class AuthHandlerTest extends TestCase
         $this->assertTrue($this->next_called);
         $this->assertSame($this->response, $response);
         Phake::verify($this->adapter)->validateToken(static::AUTH_TOKEN_STRING);
-        Phake::verify($this->request)->withAttribute(static::AUTH_TOKEN_NAME, $token);
+        Phake::verify($this->request)->withAttribute(AuthHandler::TOKEN_ATTRIBUTE, $token);
 
         Phake::verifyNoInteraction($this->credentials);
     }
@@ -148,7 +147,7 @@ class AuthHandlerTest extends TestCase
             ->thenReturn($token);
 
         Phake::when($this->request)
-            ->withAttribute(static::AUTH_TOKEN_NAME, $token)
+            ->withAttribute(AuthHandler::TOKEN_ATTRIBUTE, $token)
             ->thenReturn($this->request);
 
         $response = $this->handler->__invoke($this->request, $this->response, [$this, 'next']);
@@ -247,7 +246,7 @@ class AuthHandlerTest extends TestCase
             ->thenReturn($token);
 
         Phake::when($this->request)
-            ->withAttribute(static::AUTH_TOKEN_NAME, $token)
+            ->withAttribute(AuthHandler::TOKEN_ATTRIBUTE, $token)
             ->thenReturn($this->request);
 
         $response = $this->handler->__invoke($this->request, $this->response, [$this, 'next']);

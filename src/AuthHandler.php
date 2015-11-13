@@ -12,6 +12,8 @@ use Spark\Auth\Exception\UnauthorizedException;
 
 class AuthHandler implements MiddlewareInterface
 {
+    const TOKEN_ATTRIBUTE = 'spark/auth:token';
+
     /**
      * @var \Spark\Auth\Token\ExtractorInterface
      */
@@ -85,7 +87,7 @@ class AuthHandler implements MiddlewareInterface
      */
     protected function handleToken(ServerRequestInterface $request, Token $token)
     {
-        return $request->withAttribute('spark/auth:token', $token);
+        return $request->withAttribute(static::TOKEN_ATTRIBUTE, $token);
     }
 
     /**

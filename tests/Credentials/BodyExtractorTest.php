@@ -6,18 +6,18 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Spark\Auth\Credentials;
-use Spark\Auth\Credentials\JsonExtractor;
+use Spark\Auth\Credentials\BodyExtractor;
 
-class JsonExtractorTest extends TestCase
+class BodyExtractorTest extends TestCase
 {
     /**
-     * @var JsonExtractor
+     * @var BodyExtractor
      */
-    protected $extractor;
+    private $extractor;
 
     protected function setUp()
     {
-        $this->extractor = new JsonExtractor;
+        $this->extractor = new BodyExtractor;
     }
 
     /**
@@ -27,7 +27,7 @@ class JsonExtractorTest extends TestCase
     {
         $data = [];
 
-        // Not a JSON object
+        // Not an array
         $data[] = ['foo'];
 
         // No identifier
@@ -55,44 +55,50 @@ class JsonExtractorTest extends TestCase
         $password = 'bar';
         $request = $this->getRequest(['username' => $identifier, 'password' => $password]);
         $credentials = $this->extractor->getCredentials($request);
-        $this->assertInstanceOf(Credentials::class, $credentials);
-        $this->assertSame($identifier, $credentials->getIdentifier());
-        $this->assertSame($password, $credentials->getPassword());
+        $this->assertCredentials($credentials, $identifier, $password);
     }
 
     public function testCustomFields()
     {
         $identifier = 'foo';
         $password = 'bar';
-        $extractor = new JsonExtractor('user', 'pass');
+        $extractor = new BodyExtractor('user', 'pass');
 
         $request = $this->getRequest(['identifier' => $identifier, 'password' => $password]);
         $this->assertNull($extractor->getCredentials($request));
 
         $request = $this->getRequest(['user' => $identifier, 'pass' => $password]);
         $credentials = $extractor->getCredentials($request);
-        $this->assertInstanceOf(Credentials::class, $credentials);
-        $this->assertSame($identifier, $credentials->getIdentifier());
-        $this->assertSame($password, $credentials->getPassword());
+        $this->assertCredentials($credentials, $identifier, $password);
     }
 
     /**
      * @param mixed $body
      * @return ServerRequestInterface
      */
-    protected function getRequest($body)
+    private function getRequest($body)
     {
         $stream = Phake::mock(StreamInterface::class);
         $request = Phake::mock(ServerRequestInterface::class);
 
         Phake::when($request)
-            ->getBody()
-            ->thenReturn($stream);
-        
-        Phake::when($stream)
-            ->getContents()
-            ->thenReturn(json_encode($body));
+            ->getParsedBody()
+            ->thenReturn($body);
 
         return $request;
+    }
+
+    /**
+     * @param Credentials $credentials
+     * @param string $identifier
+     * @param string $password
+     *
+     * @return void
+     */
+    private function assertCredentials($credentials, $identifier, $password)
+    {
+        $this->assertInstanceOf(Credentials::class, $credentials);
+        $this->assertSame($identifier, $credentials->getIdentifier());
+        $this->assertSame($password, $credentials->getPassword());
     }
 }

@@ -4,13 +4,12 @@ namespace Spark\Auth;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Adr\MiddlewareInterface;
 use Spark\Auth\AdapterInterface;
 use Spark\Auth\Credentials\ExtractorInterface as CredentialsExtractor;
 use Spark\Auth\Token\ExtractorInterface as TokenExtractor;
 use Spark\Auth\Exception\UnauthorizedException;
 
-class AuthHandler implements MiddlewareInterface
+class AuthHandler
 {
     const TOKEN_ATTRIBUTE = 'spark/auth:token';
 

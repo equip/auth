@@ -45,8 +45,7 @@ class LcobucciParser implements ParserInterface
         Signer $signer,
         Configuration $config,
         ValidationData $validation
-    )
-    {
+    ) {
         $this->parser = $parser;
         $this->signer = $signer;
         $this->config = $config;
@@ -75,11 +74,7 @@ class LcobucciParser implements ParserInterface
         try {
             return $this->parser->parse((string) $token);
         } catch (\InvalidArgumentException $e) {
-            throw new InvalidException(
-                'Could not parse token: ' . $e->getMessage(),
-                InvalidException::CODE_TOKEN_INVALID,
-                $e
-            );
+            throw InvalidException::tokenInvalid($e);
         }
     }
 
@@ -92,10 +87,7 @@ class LcobucciParser implements ParserInterface
         if ($parsed->verify($this->signer, $this->config->getPublicKey())) {
             return;
         }
-        throw new InvalidException(
-            'Token signature is not valid',
-            InvalidException::CODE_TOKEN_INVALID
-        );
+        throw InvalidException::tokenInvalid();
     }
 
     /**
@@ -107,10 +99,7 @@ class LcobucciParser implements ParserInterface
         if ($parsed->validate($this->validation)) {
             return;
         }
-        throw new InvalidException(
-            'Token is expired or otherwise invalid',
-            InvalidException::CODE_TOKEN_EXPIRED
-        );
+        throw InvalidException::tokenExpired();
     }
 
     /**

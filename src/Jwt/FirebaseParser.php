@@ -1,9 +1,10 @@
 <?php
 namespace Spark\Auth\Jwt;
 
+use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
-use Spark\Auth\Jwt\Configuration;
+use Firebase\JWT\SignatureInvalidException;
 use Spark\Auth\Exception\InvalidException;
 use Spark\Auth\Token;
 
@@ -37,11 +38,27 @@ class FirebaseParser implements ParserInterface
                 $this->config->getPublicKey(),
                 [$this->config->getAlgorithm()]
             );
-        } catch (ExpiredException $e) {
-            throw new InvalidException(
-                'Token has expired: ' . $token,
-                InvalidException::CODE_TOKEN_EXPIRED
-            );
+        } catch (\Exception $e) {
+            if ($e instanceof ExpiredException) {
+                throw InvalidException::tokenExpired($e);
+            } elseif (
+                $e instanceof SignatureInvalidException ||
+                $e instanceof BeforeValidException
+            ) {
+                throw InvalidException::tokenInvalid($e);
+            } elseif (
+                $e instanceof \DomainException ||
+                $e instanceof \InvalidArgumentException ||
+                $e instanceof \UnexpectedValueException
+            ) {
+                throw InvalidException::tokenMalformed($e);
+            } else {
+                throw new InvalidException(
+                    'Unknown exception: ' . $e->getMessage(),
+                    0,
+                    $e
+                );
+            }
         }
         return new Token($token, $metadata);
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Exception;
+namespace Equip\Auth\Exception;
 
 /**
  * Exception that occurs when a user does not provide authentication

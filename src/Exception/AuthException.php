@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Exception;
+namespace Equip\Auth\Exception;
 
 /**
  * Parent class for authentication-related exceptions.

@@ -1,14 +1,14 @@
 <?php
-namespace SparkTests\Auth\Jwt;
+namespace EquipTests\Auth\Jwt;
 
 use Phake;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Auth\Exception\InvalidException;
-use Spark\Auth\Jwt\Configuration;
-use Spark\Auth\Jwt\FirebaseGenerator;
-use Spark\Auth\Jwt\FirebaseParser;
-use Spark\Auth\Token;
+use Equip\Auth\Exception\InvalidException;
+use Equip\Auth\Jwt\Configuration;
+use Equip\Auth\Jwt\FirebaseGenerator;
+use Equip\Auth\Jwt\FirebaseParser;
+use Equip\Auth\Token;
 
 class FirebaseParserTest extends TestCase
 {

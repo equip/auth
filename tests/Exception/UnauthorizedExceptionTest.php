@@ -1,7 +1,7 @@
 <?php
-namespace SparkTests\Auth\Exception;
+namespace EquipTests\Auth\Exception;
 
-use Spark\Auth\Exception\UnauthorizedException;
+use Equip\Auth\Exception\UnauthorizedException;
 
 class UnauthorizedExceptionTest extends ExceptionTestCase
 {

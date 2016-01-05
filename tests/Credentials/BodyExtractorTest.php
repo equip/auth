@@ -1,12 +1,12 @@
 <?php
-namespace SparkTests\Auth\Credentials;
+namespace EquipTests\Auth\Credentials;
 
 use Phake;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
-use Spark\Auth\Credentials;
-use Spark\Auth\Credentials\BodyExtractor;
+use Equip\Auth\Credentials;
+use Equip\Auth\Credentials\BodyExtractor;
 
 class BodyExtractorTest extends TestCase
 {

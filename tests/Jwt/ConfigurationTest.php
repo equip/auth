@@ -1,8 +1,8 @@
 <?php
-namespace SparkTests\Auth\Jwt;
+namespace EquipTests\Auth\Jwt;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Spark\Auth\Jwt\Configuration;
+use Equip\Auth\Jwt\Configuration;
 
 class ConfigurationTestCase extends TestCase
 {

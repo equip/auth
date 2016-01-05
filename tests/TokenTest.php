@@ -1,8 +1,8 @@
 <?php
-namespace SparkTests\Auth;
+namespace EquipTests\Auth;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Spark\Auth\Token;
+use Equip\Auth\Token;
 
 class TokenTest extends TestCase
 {

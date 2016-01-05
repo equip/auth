@@ -1,5 +1,5 @@
 <?php
-namespace SparkTests\Auth\Jwt;
+namespace EquipTests\Auth\Jwt;
 
 use DateTime;
 use Lcobucci\JWT\Builder;
@@ -9,11 +9,11 @@ use Lcobucci\JWT\ValidationData;
 use Phake;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Spark\Auth\Exception\InvalidException;
-use Spark\Auth\Jwt\Configuration;
-use Spark\Auth\Jwt\LcobucciGenerator;
-use Spark\Auth\Jwt\LcobucciParser;
-use Spark\Auth\Token;
+use Equip\Auth\Exception\InvalidException;
+use Equip\Auth\Jwt\Configuration;
+use Equip\Auth\Jwt\LcobucciGenerator;
+use Equip\Auth\Jwt\LcobucciParser;
+use Equip\Auth\Token;
 
 class LcobucciParserTest extends TestCase
 {

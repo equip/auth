@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Exception;
+namespace Equip\Auth\Exception;
 
 /**
  * Exception that occurs when a user specifies an authentication token that is

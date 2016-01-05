@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth;
+namespace Equip\Auth;
 
 class Credentials
 {

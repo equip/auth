@@ -1,9 +1,9 @@
 <?php
 
-namespace Spark\Auth\Credentials;
+namespace Equip\Auth\Credentials;
 
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Auth\Credentials;
+use Equip\Auth\Credentials;
 
 /**
  * Extracts credentials from top-level properties of a request body.

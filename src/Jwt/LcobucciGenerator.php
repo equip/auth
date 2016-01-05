@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Jwt;
+namespace Equip\Auth\Jwt;
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer;

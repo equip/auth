@@ -1,5 +1,5 @@
 <?php
-namespace SparkTests\Auth\Exception;
+namespace EquipTests\Auth\Exception;
 
 use PHPUnit_Framework_TestCase as TestCase;
 

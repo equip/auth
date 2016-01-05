@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Credentials;
+namespace Equip\Auth\Credentials;
 
 use Psr\Http\Message\ServerRequestInterface;
 

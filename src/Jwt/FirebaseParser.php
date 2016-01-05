@@ -1,11 +1,11 @@
 <?php
-namespace Spark\Auth\Jwt;
+namespace Equip\Auth\Jwt;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
-use Spark\Auth\Jwt\Configuration;
-use Spark\Auth\Exception\InvalidException;
-use Spark\Auth\Token;
+use Equip\Auth\Jwt\Configuration;
+use Equip\Auth\Exception\InvalidException;
+use Equip\Auth\Token;
 
 /**
  * Parser for JWT authentication token strings that uses the firebase/php-jwt

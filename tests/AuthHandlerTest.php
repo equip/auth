@@ -1,20 +1,20 @@
 <?php
-namespace SparkTests\Auth;
+namespace EquipTests\Auth;
 
 use Phake;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Auth\AdapterInterface;
-use Spark\Auth\AuthHandler;
-use Spark\Auth\Credentials;
-use Spark\Auth\Credentials\ExtractorInterface as CredentialsExtractor;
-use Spark\Auth\RequestFilterInterface;
-use Spark\Auth\Token;
-use Spark\Auth\Token\ExtractorInterface as TokenExtractor;
-use Spark\Auth\Exception\AuthException;
-use Spark\Auth\Exception\InvalidException;
-use Spark\Auth\Exception\UnauthorizedException;
+use Equip\Auth\AdapterInterface;
+use Equip\Auth\AuthHandler;
+use Equip\Auth\Credentials;
+use Equip\Auth\Credentials\ExtractorInterface as CredentialsExtractor;
+use Equip\Auth\RequestFilterInterface;
+use Equip\Auth\Token;
+use Equip\Auth\Token\ExtractorInterface as TokenExtractor;
+use Equip\Auth\Exception\AuthException;
+use Equip\Auth\Exception\InvalidException;
+use Equip\Auth\Exception\UnauthorizedException;
 
 class AuthHandlerTest extends TestCase
 {
@@ -22,17 +22,17 @@ class AuthHandlerTest extends TestCase
     const AUTH_TOKEN_STRING = 'token';
 
     /**
-     * @var \Spark\Auth\Token\ExtractorInterface
+     * @var \Equip\Auth\Token\ExtractorInterface
      */
     protected $token;
 
     /**
-     * @var \Spark\Auth\Credentials\ExtractorInterface
+     * @var \Equip\Auth\Credentials\ExtractorInterface
      */
     protected $credentials;
 
     /**
-     * @var \Spark\Auth\Adapter\AdapterInterface
+     * @var \Equip\Auth\Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -47,7 +47,7 @@ class AuthHandlerTest extends TestCase
     protected $response;
 
     /**
-     * @var \Spark\Auth\AuthHandler
+     * @var \Equip\Auth\AuthHandler
      */
     protected $handler;
 

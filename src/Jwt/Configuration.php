@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Jwt;
+namespace Equip\Auth\Jwt;
 
 class Configuration
 {

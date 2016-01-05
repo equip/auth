@@ -1,5 +1,5 @@
 <?php
-namespace SparkTests\Auth\Jwt;
+namespace EquipTests\Auth\Jwt;
 
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Hmac\Sha256 as Hs256;
@@ -7,7 +7,7 @@ use Lcobucci\JWT\Signer\Hmac\Sha384 as Hs384;
 use Lcobucci\JWT\Signer\Hmac\Sha512 as Hs512;
 use Lcobucci\JWT\Signer\Rsa\Sha256 as Rs256;
 use PHPUnit_Framework_TestCase as TestCase;
-use Spark\Auth\Jwt\LcobucciSignerFactory;
+use Equip\Auth\Jwt\LcobucciSignerFactory;
 
 class LcobucciSignerFactoryTest extends TestCase
 {

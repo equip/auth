@@ -1,11 +1,11 @@
 <?php
-namespace SparkTests\Auth\Jwt;
+namespace EquipTests\Auth\Jwt;
 
 use Phake;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Auth\Jwt\Configuration;
-use Spark\Auth\Jwt\FirebaseGenerator;
+use Equip\Auth\Jwt\Configuration;
+use Equip\Auth\Jwt\FirebaseGenerator;
 
 class FirebaseGeneratorTest extends TestCase
 {

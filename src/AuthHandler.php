@@ -1,25 +1,25 @@
 <?php
 
-namespace Spark\Auth;
+namespace Equip\Auth;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Auth\AdapterInterface;
-use Spark\Auth\Credentials\ExtractorInterface as CredentialsExtractor;
-use Spark\Auth\Token\ExtractorInterface as TokenExtractor;
-use Spark\Auth\Exception\UnauthorizedException;
+use Equip\Auth\AdapterInterface;
+use Equip\Auth\Credentials\ExtractorInterface as CredentialsExtractor;
+use Equip\Auth\Token\ExtractorInterface as TokenExtractor;
+use Equip\Auth\Exception\UnauthorizedException;
 
 class AuthHandler
 {
     const TOKEN_ATTRIBUTE = 'spark/auth:token';
 
     /**
-     * @var \Spark\Auth\Token\ExtractorInterface
+     * @var \Equip\Auth\Token\ExtractorInterface
      */
     protected $token;
 
     /**
-     * @var \Spark\Auth\Credentials\ExtractorInterface
+     * @var \Equip\Auth\Credentials\ExtractorInterface
      */
     protected $credentials;
 
@@ -34,8 +34,8 @@ class AuthHandler
     protected $filter;
 
     /**
-     * @param \Spark\Auth\Token\ExtractorInterface $token
-     * @param \Spark\Auth\Credentials\ExtractorInterface $credentials
+     * @param \Equip\Auth\Token\ExtractorInterface $token
+     * @param \Equip\Auth\Credentials\ExtractorInterface $credentials
      * @param AdapterInterface $adapter
      * @param RequestFilterInterface $filter
      */

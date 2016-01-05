@@ -1,12 +1,12 @@
 <?php
-namespace Spark\Auth\Jwt;
+namespace Equip\Auth\Jwt;
 
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Token as ParsedToken;
 use Lcobucci\JWT\ValidationData;
-use Spark\Auth\Exception\InvalidException;
-use Spark\Auth\Token;
+use Equip\Auth\Exception\InvalidException;
+use Equip\Auth\Token;
 
 /**
  * Parser for JWT authentication token strings that uses the lcobucci/jwt

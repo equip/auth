@@ -1,7 +1,7 @@
 <?php
-namespace SparkTests\Auth\Exception;
+namespace EquipTests\Auth\Exception;
 
-use Spark\Auth\Exception\InvalidException;
+use Equip\Auth\Exception\InvalidException;
 
 class InvalidExceptionTest extends ExceptionTestCase
 {

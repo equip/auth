@@ -1,7 +1,7 @@
 <?php
-namespace Spark\Auth;
+namespace Equip\Auth;
 
-use Spark\Auth\Credentials;
+use Equip\Auth\Credentials;
 
 interface AdapterInterface
 {
@@ -16,10 +16,10 @@ interface AdapterInterface
      *   instance is thrown.
      *
      * @param string $token
-     * @return \Spark\Auth\Token
-     * @throws \Spark\Auth\Exception\InvalidException if an invalid auth token
+     * @return \Equip\Auth\Token
+     * @throws \Equip\Auth\Exception\InvalidException if an invalid auth token
      *         is specified
-     * @throws \Spark\Auth\Exception\AuthException if another error occurs
+     * @throws \Equip\Auth\Exception\AuthException if another error occurs
      *         during authentication
      */
     public function validateToken($token);
@@ -34,11 +34,11 @@ interface AdapterInterface
      * - If for some reason the user credentials cannot be validated, an
      *   AuthException instance is thrown.
      *
-     * @param \Spark\Auth\Credentials $credentials
-     * @return \Spark\Auth\Token
-     * @throws \Spark\Auth\Exception\InvalidException if an invalid auth token
+     * @param \Equip\Auth\Credentials $credentials
+     * @return \Equip\Auth\Token
+     * @throws \Equip\Auth\Exception\InvalidException if an invalid auth token
      *         is specified
-     * @throws \Spark\Auth\Exception\AuthException if another error occurs
+     * @throws \Equip\Auth\Exception\AuthException if another error occurs
      *         during authentication
      */
     public function validateCredentials(Credentials $credentials);

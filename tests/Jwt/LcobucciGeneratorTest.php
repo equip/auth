@@ -1,14 +1,14 @@
 <?php
-namespace SparkTests\Auth\Jwt;
+namespace EquipTests\Auth\Jwt;
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Hmac\Sha256 as Signer;
 use Phake;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Auth\Jwt\Configuration;
-use Spark\Auth\Jwt\LcobucciGenerator;
-use Spark\Auth\Jwt\LcobucciSignerFactory;
+use Equip\Auth\Jwt\Configuration;
+use Equip\Auth\Jwt\LcobucciGenerator;
+use Equip\Auth\Jwt\LcobucciSignerFactory;
 
 class LcobucciGeneratorTest extends TestCase
 {

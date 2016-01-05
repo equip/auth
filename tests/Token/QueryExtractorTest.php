@@ -1,15 +1,15 @@
 <?php
-namespace SparkTests\Auth\Token;
+namespace EquipTests\Auth\Token;
 
 use Phake;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Spark\Auth\Token\QueryExtractor;
+use Equip\Auth\Token\QueryExtractor;
 
 class QueryExtractorTest extends TestCase
 {
     /**
-     * @var \Spark\Auth\Token\QueryExtractor
+     * @var \Equip\Auth\Token\QueryExtractor
      */
     protected $extractor;
 

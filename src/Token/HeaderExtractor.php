@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Token;
+namespace Equip\Auth\Token;
 
 use Psr\Http\Message\ServerRequestInterface;
 

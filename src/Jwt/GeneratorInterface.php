@@ -1,5 +1,5 @@
 <?php
-namespace Spark\Auth\Jwt;
+namespace Equip\Auth\Jwt;
 
 /**
  * Interface for a generator of JWT authentication token strings.

@@ -1,10 +1,11 @@
-## Spark.Auth
-[![Build Status](https://travis-ci.org/sparkphp/auth.svg)](https://travis-ci.org/sparkphp/auth)
-[![Coverage Status](https://coveralls.io/repos/sparkphp/auth/badge.svg?branch=master&service=github)](https://coveralls.io/github/sparkphp/auth?branch=master)
-[![License](https://img.shields.io/packagist/l/sparkphp/Auth.svg)](https://github.com/sparkphp/Auth/blob/master/LICENSE)
-[![Latest Stable Version](https://img.shields.io/packagist/v/sparkphp/auth.svg)](https://packagist.org/packages/sparkphp/auth)
-[![Code Quality](https://img.shields.io/codeclimate/github/sparkphp/Auth.svg)](https://codeclimate.com/github/sparkphp/Auth)
+## Equip Authentication
 
-A simple middleware for creating custom authentication for your APIs. Attempts to be [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/), [PSR-4](http://www.php-fig.org/psr/psr-4/) and [PSR-7](http://www.php-fig.org/psr/psr-7/) compliant. Works great in applications that use the [ADR](https://github.com/pmjones/adr) pattern.
+[![Latest Stable Version](https://img.shields.io/packagist/v/equip/auth.svg)](https://packagist.org/packages/equip/auth)
+[![License](https://img.shields.io/packagist/l/equip/auth.svg)](https://github.com/equip/auth/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/equip/auth.svg)](https://travis-ci.org/equip/auth)
+[![Code Coverage](https://scrutinizer-ci.com/g/equip/auth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/equip/auth/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equip/auth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/equip/auth/?branch=master)
 
-For more information, see [the documentation](http://spark.readthedocs.org/en/latest/auth).
+A simple middleware for creating custom authentication for your APIs. Attempts to be [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/), [PSR-4](http://www.php-fig.org/psr/psr-4/) and [PSR-7](http://www.php-fig.org/psr/psr-7/) compliant. Works great in applications that use the [ADR](http://pmjones.io/adr/) pattern.
+
+For more information, see [the documentation](http://equipframework.readthedocs.org/en/latest/auth).

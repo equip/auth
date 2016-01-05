@@ -1,8 +1,8 @@
 <?php
-namespace SparkTests\Auth;
+namespace EquipTests\Auth;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Spark\Auth\Credentials;
+use Equip\Auth\Credentials;
 
 class CredentialsTest extends TestCase
 {

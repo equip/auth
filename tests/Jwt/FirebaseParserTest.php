@@ -65,6 +65,20 @@ class FirebaseParserTest extends TestCase
         }
     }
 
+    public function testParseTokenWithInvalidToken()
+    {
+        $parser = new FirebaseParser($this->config);
+
+        try {
+            $parser->parseToken(
+                'undefined'
+            );
+            $this->fail('Expected exception was not thrown');
+        } catch (InvalidException $e) {
+            $this->assertSame(InvalidException::CODE_TOKEN_INVALID, $e->getCode());
+        }
+    }
+
     public function testParseTokenWithDefaultAlgorithm()
     {
         $this->parseToken(

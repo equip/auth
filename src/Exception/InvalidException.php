@@ -1,26 +1,65 @@
 <?php
 namespace Equip\Auth\Exception;
 
+use Exception;
+
 /**
  * Exception that occurs when a user specifies an authentication token that is
  * invalid.
  */
 class InvalidException extends AuthException
 {
-    const CODE_TOKEN_EXPIRED = 1;
-    const CODE_TOKEN_INVALID = 2;
-    const CODE_CREDENTIALS_INVALID = 3;
+    const CODE = 403;
 
-    public function __construct(
-        $message = 'The token being used is invalid',
-        $code = 0,
-        \Exception $previous = null
-    ) {
-        parent::__construct($message, $code, $previous);
+    /**
+     * @param string $token
+     * @param Exception $previous
+     */
+    public static function tokenExpired($token, Exception $previous = null)
+    {
+        return new static(
+            sprintf('Provided auth token `%s` is expired', $token),
+            static::CODE,
+            $previous
+        );
     }
 
-    public function getStatusCode()
+    /**
+     * @param string $token
+     * @param Exception $previous
+     */
+    public static function tokenUnparseable($token, Exception $previous = null)
     {
-        return 403;
+        return new static(
+            sprintf('Provided auth token `%s` could not be parsed', $token),
+            static::CODE,
+            $previous
+        );
+    }
+
+    /**
+     * @param string $token
+     * @param Exception $previous
+     */
+    public static function invalidSignature($token, Exception $previous = null)
+    {
+        return new static(
+            sprintf('Signature of provided auth token `%s` is not valid', $token),
+            static::CODE,
+            $previous
+        );
+    }
+
+    /**
+     * @param string $token
+     * @param Exception $previous
+     */
+    public static function invalidToken($token, Exception $previous = null)
+    {
+        return new static(
+            sprintf('Provided auth token `%s` is expired or otherwise invalid', $token),
+            static::CODE,
+            $previous
+        );
     }
 }

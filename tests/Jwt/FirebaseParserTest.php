@@ -1,14 +1,14 @@
 <?php
 namespace EquipTests\Auth\Jwt;
 
-use Phake;
-use PHPUnit_Framework_TestCase as TestCase;
-use Psr\Http\Message\ServerRequestInterface;
 use Equip\Auth\Exception\InvalidException;
 use Equip\Auth\Jwt\Configuration;
 use Equip\Auth\Jwt\FirebaseGenerator;
 use Equip\Auth\Jwt\FirebaseParser;
 use Equip\Auth\Token;
+use PHPUnit_Framework_TestCase as TestCase;
+use Phake;
+use Psr\Http\Message\ServerRequestInterface;
 
 class FirebaseParserTest extends TestCase
 {
@@ -53,30 +53,16 @@ class FirebaseParserTest extends TestCase
 
     public function testParseTokenWithExpiredToken()
     {
+        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cmkiLCJpYXQiOiIxNDQzNzE5MjM2IiwiZXhwIjoxNDQzNzIyODM2LCJzdWIiOiJ1c2VyLTEifQ.YquvWRtH72muTv1hCCKH4HBkBhhCm1wTG0MpnyC-pvQ';
+
+        $this->setExpectedException(
+            InvalidException::class,
+            '',
+            InvalidException::CODE
+        );
+
         $parser = new FirebaseParser($this->config);
-
-        try {
-            $parser->parseToken(
-                'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cmkiLCJpYXQiOiIxNDQzNzE5MjM2IiwiZXhwIjoxNDQzNzIyODM2LCJzdWIiOiJ1c2VyLTEifQ.YquvWRtH72muTv1hCCKH4HBkBhhCm1wTG0MpnyC-pvQ'
-            );
-            $this->fail('Expected exception was not thrown');
-        } catch (InvalidException $e) {
-            $this->assertSame(InvalidException::CODE_TOKEN_EXPIRED, $e->getCode());
-        }
-    }
-
-    public function testParseTokenWithInvalidToken()
-    {
-        $parser = new FirebaseParser($this->config);
-
-        try {
-            $parser->parseToken(
-                'undefined'
-            );
-            $this->fail('Expected exception was not thrown');
-        } catch (InvalidException $e) {
-            $this->assertSame(InvalidException::CODE_TOKEN_INVALID, $e->getCode());
-        }
+        $parser->parseToken($token);
     }
 
     public function testParseTokenWithDefaultAlgorithm()

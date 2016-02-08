@@ -1,12 +1,12 @@
 <?php
 namespace Equip\Auth\Jwt;
 
+use Equip\Auth\Exception\InvalidException;
+use Equip\Auth\Token;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Token as ParsedToken;
 use Lcobucci\JWT\ValidationData;
-use Equip\Auth\Exception\InvalidException;
-use Equip\Auth\Token;
 
 /**
  * Parser for JWT authentication token strings that uses the lcobucci/jwt
@@ -75,11 +75,7 @@ class LcobucciParser implements ParserInterface
         try {
             return $this->parser->parse((string) $token);
         } catch (\InvalidArgumentException $e) {
-            throw new InvalidException(
-                'Could not parse token: ' . $e->getMessage(),
-                InvalidException::CODE_TOKEN_INVALID,
-                $e
-            );
+            throw InvalidException::tokenUnparseable($token, $e);
         }
     }
 
@@ -92,10 +88,7 @@ class LcobucciParser implements ParserInterface
         if ($parsed->verify($this->signer, $this->config->getPublicKey())) {
             return;
         }
-        throw new InvalidException(
-            'Token signature is not valid',
-            InvalidException::CODE_TOKEN_INVALID
-        );
+        throw InvalidException::invalidSignature((string) $parsed);
     }
 
     /**
@@ -107,10 +100,7 @@ class LcobucciParser implements ParserInterface
         if ($parsed->validate($this->validation)) {
             return;
         }
-        throw new InvalidException(
-            'Token is expired or otherwise invalid',
-            InvalidException::CODE_TOKEN_EXPIRED
-        );
+        throw InvalidException::invalidToken((string) $parsed);
     }
 
     /**

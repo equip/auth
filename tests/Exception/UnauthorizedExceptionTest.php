@@ -2,21 +2,16 @@
 namespace EquipTests\Auth\Exception;
 
 use Equip\Auth\Exception\UnauthorizedException;
+use Exception;
 
-class UnauthorizedExceptionTest extends ExceptionTestCase
+class UnauthorizedExceptionTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getExceptionClass()
+    public function testNoToken()
     {
-        return UnauthorizedException::class;
-    }
-
-    protected function getDefaultMessage()
-    {
-        return 'No authentication token was specified';
-    }
-
-    protected function getStatusCode()
-    {
-        return 401;
+        $previous = new Exception('test');
+        $exception = UnauthorizedException::noToken($previous);
+        $this->assertSame('No authentication token was specified', $exception->getMessage());
+        $this->assertSame(UnauthorizedException::CODE, $exception->getCode());
+        $this->assertSame($previous, $exception->getPrevious());
     }
 }

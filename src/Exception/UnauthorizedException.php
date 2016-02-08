@@ -1,22 +1,22 @@
 <?php
 namespace Equip\Auth\Exception;
 
+use Exception;
+
 /**
  * Exception that occurs when a user does not provide authentication
  * credentials.
  */
 class UnauthorizedException extends AuthException
 {
-    public function __construct(
-        $message = 'No authentication token was specified',
-        $code = 0,
-        \Exception $previous = null
-    ) {
-        parent::__construct($message, $code, $previous);
-    }
+    const CODE = 401;
 
-    public function getStatusCode()
+    public static function noToken(Exception $previous = null)
     {
-        return 401;
+        return new static(
+            'No authentication token was specified',
+            static::CODE,
+            $previous
+        );
     }
 }

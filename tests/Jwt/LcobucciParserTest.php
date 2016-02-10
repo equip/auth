@@ -2,18 +2,18 @@
 namespace EquipTests\Auth\Jwt;
 
 use DateTime;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Signer\Hmac\Sha256 as Signer;
-use Lcobucci\JWT\ValidationData;
-use Phake;
-use PHPUnit_Framework_TestCase as TestCase;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Equip\Auth\Exception\InvalidException;
 use Equip\Auth\Jwt\Configuration;
 use Equip\Auth\Jwt\LcobucciGenerator;
 use Equip\Auth\Jwt\LcobucciParser;
 use Equip\Auth\Token;
+use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Signer\Hmac\Sha256 as Signer;
+use Lcobucci\JWT\ValidationData;
+use PHPUnit_Framework_TestCase as TestCase;
+use Phake;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class LcobucciParserTest extends TestCase
 {
@@ -80,40 +80,49 @@ class LcobucciParserTest extends TestCase
 
         $token = $generator->getToken(['sub' => $this->subject]);
 
-        try {
-            $parsed = $parser->parseToken($token);
-            $this->fail('Expected exception was not thrown');
-        } catch (InvalidException $e) {
-            $this->assertSame(InvalidException::CODE_TOKEN_EXPIRED, $e->getCode());
-        }
+        $this->setExpectedException(
+            InvalidException::class,
+            '',
+            InvalidException::CODE
+        );
+
+        $parsed = $parser->parseToken($token);
     }
 
-    public function testParseWithException()
+    public function testParseWithInvalidParameters()
     {
-        // Token with invalid parameters
         $token = "invalid token";
         $currentTimestamp = time();
         $currentConfig = $this->getMockConfiguration($currentTimestamp);
         $parser = $this->getParser($currentConfig, $currentTimestamp);
 
-        try {
-            $parsed = $parser->parseToken($token);
-            $this->fail('Expected exception was not thrown');
-        } catch (InvalidException $e) {
-            $this->assertSame(InvalidException::CODE_TOKEN_INVALID, $e->getCode());
-        }
+        $this->setExpectedException(
+            InvalidException::class,
+            '',
+            InvalidException::CODE
+        );
 
-        // Generate token with invalid signature
-        $pastConfig = $this->getMockConfiguration(time(), '57315647af9b5ff0c77fb679951a9bf4');
+        $parsed = $parser->parseToken($token);
+    }
+
+    public function testParseWithInvalidSignature()
+    {
+        $currentTimestamp = time();
+        $pastConfig = $this->getMockConfiguration($currentTimestamp, '57315647af9b5ff0c77fb679951a9bf4');
         $generator = $this->getGenerator($pastConfig);
         $token = $generator->getToken(['sub' => $this->subject]);
-        try {
-            $parsed = $parser->parseToken($token);
-            $this->fail('Expected exception was not thrown');
-        } catch (InvalidException $e) {
-            $this->assertSame(InvalidException::CODE_TOKEN_INVALID, $e->getCode());
-        }
+        $currentConfig = $this->getMockConfiguration($currentTimestamp);
+        $parser = $this->getParser($currentConfig, $currentTimestamp);
+
+        $this->setExpectedException(
+            InvalidException::class,
+            '',
+            InvalidException::CODE
+        );
+
+        $parsed = $parser->parseToken($token);
     }
+
     /**
      * @param integer $timestamp
      * @return Configuration

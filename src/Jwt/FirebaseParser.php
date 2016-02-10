@@ -1,12 +1,11 @@
 <?php
 namespace Equip\Auth\Jwt;
 
-use Firebase\JWT\JWT;
-use Firebase\JWT\ExpiredException;
-use Equip\Auth\Jwt\Configuration;
 use Equip\Auth\Exception\InvalidException;
+use Equip\Auth\Jwt\Configuration;
 use Equip\Auth\Token;
-use UnexpectedValueException;
+use Firebase\JWT\ExpiredException;
+use Firebase\JWT\JWT;
 
 /**
  * Parser for JWT authentication token strings that uses the firebase/php-jwt
@@ -39,15 +38,7 @@ class FirebaseParser implements ParserInterface
                 [$this->config->getAlgorithm()]
             );
         } catch (ExpiredException $e) {
-            throw new InvalidException(
-                'Token has expired: ' . $token,
-                InvalidException::CODE_TOKEN_EXPIRED
-            );
-        } catch (UnexpectedValueException $e) {
-            throw new InvalidException(
-                'Token is invalid: ' . $token,
-                InvalidException::CODE_TOKEN_INVALID
-            );
+            throw InvalidException::tokenExpired($token, $e);
         }
         return new Token($token, $metadata);
     }

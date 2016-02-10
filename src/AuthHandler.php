@@ -68,7 +68,7 @@ class AuthHandler
             } elseif ($credentials = $this->credentials->getCredentials($request)) {
                 $authToken = $this->adapter->validateCredentials($credentials);
             } else {
-                throw new UnauthorizedException;
+                throw UnauthorizedException::noToken();
             }
 
             $request = $this->handleToken($request, $authToken);

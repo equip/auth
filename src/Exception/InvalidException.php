@@ -5,7 +5,8 @@ use Exception;
 
 /**
  * Exception that occurs when a user specifies an authentication token that is
- * invalid.
+ * invalid or credentials that are not recognized to obtain an authentication
+ * token.
  */
 class InvalidException extends AuthException
 {
@@ -58,6 +59,32 @@ class InvalidException extends AuthException
     {
         return new static(
             sprintf('Provided auth token `%s` is expired or otherwise invalid', $token),
+            static::CODE,
+            $previous
+        );
+    }
+
+    /**
+     * @param string $identifier
+     * @param Exception $previous
+     */
+    public static function unknownIdentifier($identifier, Exception $previous = null)
+    {
+        return new static(
+            sprintf('Specified identifier `%s` is not recognized', $identifier),
+            static::CODE,
+            $previous
+        );
+    }
+
+    /**
+     * @param string $identifier
+     * @param Exception $previous
+     */
+    public static function incorrectPassword($identifier, Exception $previous = null)
+    {
+        return new static(
+            sprintf('Incorrect password specified for identifier `%s`', $identifier),
             static::CODE,
             $previous
         );

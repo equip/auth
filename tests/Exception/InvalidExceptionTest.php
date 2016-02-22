@@ -9,9 +9,9 @@ class InvalidExceptionTest extends \PHPUnit_Framework_TestCase
     /**
      * @param string $method
      * @param string $message
-     * @dataProvider dataProviderMethods
+     * @dataProvider dataProviderTokenMethods
      */
-    public function testMethods($method, $message)
+    public function testTokenMethods($method, $message)
     {
         $previous = new Exception('test');
         $exception = InvalidException::$method('token', $previous);
@@ -23,7 +23,7 @@ class InvalidExceptionTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    public function dataProviderMethods()
+    public function dataProviderTokenMethods()
     {
         return [
             [
@@ -41,6 +41,37 @@ class InvalidExceptionTest extends \PHPUnit_Framework_TestCase
             [
                 'invalidToken',
                 'Provided auth token `token` is expired or otherwise invalid',
+            ],
+        ];
+    }
+
+    /**
+     * @param string $method
+     * @param string $message
+     * @dataProvider dataProviderIdentifierMethods
+     */
+    public function testIdentifierMethods($method, $message)
+    {
+        $previous = new Exception('test');
+        $exception = InvalidException::$method('username', $previous);
+        $this->assertSame($message, $exception->getMessage());
+        $this->assertSame(InvalidException::CODE, $exception->getCode());
+        $this->assertSame($previous, $exception->getPrevious());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function dataProviderIdentifierMethods()
+    {
+        return [
+            [
+                'unknownIdentifier',
+                'Specified identifier `username` is not recognized',
+            ],
+            [
+                'incorrectPassword',
+                'Incorrect password specified for identifier `username`',
             ],
         ];
     }
